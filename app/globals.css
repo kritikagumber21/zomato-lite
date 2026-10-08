@@ -2,11 +2,12 @@
 
 :root {
   color-scheme: light;
-  --background: #f7f6f2;
-  --foreground: #25241f;
-  --muted: #77756f;
-  --line: #e6e3dc;
-  --accent: #a34d35;
+  --background: #ffffff;
+  --foreground: #242424;
+  --muted: #777777;
+  --line: #eeeeee;
+  --accent: #ef4056;
+  --rating: #39824b;
 }
 
 @theme inline {
@@ -24,7 +25,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,8 +61,8 @@ p {
 h1 {
   margin-bottom: 9px;
   font-size: clamp(30px, 8vw, 42px);
-  font-weight: 600;
-  letter-spacing: -0.045em;
+  font-weight: 700;
+  letter-spacing: -0.035em;
   line-height: 1.08;
 }
 
@@ -85,8 +86,9 @@ h1 {
 
 .average-rating {
   margin: 0;
+  color: var(--rating);
   font-size: clamp(72px, 20vw, 104px);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.08em;
   line-height: 0.95;
 }
@@ -99,9 +101,10 @@ h1 {
 .latest-review,
 .empty-state {
   padding: 22px 24px 24px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #fbfaf7;
+  border: 1px solid #f4f4f4;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 26px rgb(0 0 0 / 5%);
 }
 
 .section-label-row {
@@ -233,9 +236,9 @@ time.muted {
   height: 48px;
   padding: 0;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fbfaf7;
-  color: #a8a59d;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #b8b8b8;
   cursor: pointer;
   font-size: 25px;
   transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
@@ -244,7 +247,7 @@ time.muted {
 .star-button:hover,
 .star-button.selected {
   border-color: var(--accent);
-  background: #f6ece7;
+  background: #fff1f3;
   color: var(--accent);
 }
 
@@ -253,13 +256,14 @@ time.muted {
   min-height: 150px;
   resize: vertical;
   padding: 15px 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 1px solid #e9e9e9;
+  border-radius: 14px;
   outline: none;
-  background: #fbfaf7;
+  background: #ffffff;
   color: var(--foreground);
   font-size: 15px;
   line-height: 1.5;
+  box-shadow: 0 5px 18px rgb(0 0 0 / 4%);
 }
 
 .comment-input:focus {
@@ -271,11 +275,11 @@ time.muted {
 }
 
 .submit-button {
-  align-self: flex-start;
+  align-self: stretch;
   margin-top: 22px;
-  padding: 13px 20px;
+  padding: 15px 20px;
   border: 1px solid var(--accent);
-  border-radius: 7px;
+  border-radius: 14px;
   background: var(--accent);
   color: #fffdfa;
   cursor: pointer;
@@ -284,12 +288,12 @@ time.muted {
 }
 
 .submit-button:hover:not(:disabled) {
-  background: #873e2b;
+  background: #d93349;
 }
 
 .submit-button:disabled {
-  border-color: #d4d0c8;
-  background: #d4d0c8;
+  border-color: #f1b7c0;
+  background: #f1b7c0;
   cursor: not-allowed;
 }
 
