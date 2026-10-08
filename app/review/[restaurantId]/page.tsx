@@ -75,10 +75,13 @@ export default function ReviewPage({ params }: { params: Promise<{ restaurantId:
   return (
     <main className="page-shell">
       <Link className="back-link" href={restaurantId ? `/restaurant/${restaurantId}` : "/"}>
-        <span aria-hidden="true">←</span> Back to restaurant
+        <span className="back-arrow" aria-hidden="true">←</span> Back to restaurant
       </Link>
+      <div className="screen-topbar review-kicker">
+        <div className="screen-kicker"><span className="brand-mark" aria-hidden="true">Z</span><span>WRITE A REVIEW</span></div>
+        <div className="wordmark" aria-label="Zomato Lite"><span>zomato</span><small>lite</small></div>
+      </div>
       <header className="restaurant-heading form-heading">
-        <p className="eyebrow">YOUR VISIT</p>
         <h1>{restaurantName ?? "Loading restaurant…"}</h1>
         <p className="muted">How was your experience?</p>
       </header>
@@ -86,6 +89,7 @@ export default function ReviewPage({ params }: { params: Promise<{ restaurantId:
       <form className="review-form" onSubmit={handleSubmit}>
         <fieldset className="rating-picker">
           <legend className="field-label">Your rating</legend>
+          <p className="field-hint">Choose a star rating for this restaurant.</p>
           <div className="star-options">
             {[1, 2, 3, 4, 5].map((value) => (
               <button
@@ -102,7 +106,7 @@ export default function ReviewPage({ params }: { params: Promise<{ restaurantId:
           </div>
         </fieldset>
 
-        <label className="field-label" htmlFor="comment">Your review</label>
+        <label className="field-label comment-label" htmlFor="comment">Your review</label>
         <textarea
           id="comment"
           className="comment-input"

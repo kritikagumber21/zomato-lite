@@ -60,34 +60,43 @@ export default function RestaurantPage({ params }: { params: Promise<{ id: strin
 
   return (
     <main className="page-shell">
+      <div className="screen-topbar">
+        <div className="screen-kicker"><span className="brand-mark" aria-hidden="true">Z</span><span>RESTAURANT REVIEWS</span></div>
+        <div className="wordmark" aria-label="Zomato Lite"><span>zomato</span><small>lite</small></div>
+      </div>
       <header className="restaurant-heading">
-        <p className="eyebrow">RESTAURANT</p>
         <h1>{restaurant.name}</h1>
-        <p className="muted">{restaurant.cuisine} <span aria-hidden="true">·</span> {restaurant.area}</p>
+        <p className="muted restaurant-meta"><span>{restaurant.cuisine}</span><span className="meta-divider" aria-hidden="true" /><span>{restaurant.area}</span></p>
       </header>
 
       <section className="rating-summary" aria-label="Restaurant rating">
-        <p className="average-rating">
-          {restaurant.averageRating === null ? "—" : restaurant.averageRating}
-        </p>
-        <p className="review-count">
-          {restaurant.totalReviews} {restaurant.totalReviews === 1 ? "review" : "reviews"}
-        </p>
+        <div className="rating-copy">
+          <p className="eyebrow">COMMUNITY RATING</p>
+          <p className="review-count">Based on {restaurant.totalReviews} {restaurant.totalReviews === 1 ? "review" : "reviews"}</p>
+        </div>
+        <div className="rating-pill" aria-label="Average restaurant rating">
+          <span className="average-rating">{restaurant.averageRating === null ? "—" : restaurant.averageRating}</span>
+          <span className="rating-star" aria-hidden="true">★</span>
+        </div>
       </section>
 
       {restaurant.latestReview ? (
         <section className="latest-review" aria-labelledby="latest-heading">
-          <div className="section-label-row">
-            <h2 id="latest-heading">Latest review</h2>
-            <span className="review-stars" aria-label={`${restaurant.latestReview.rating} out of 5 stars`}>
-              {"★".repeat(restaurant.latestReview.rating)}{"☆".repeat(5 - restaurant.latestReview.rating)}
+          <div className="latest-card-top">
+            <div>
+              <p className="eyebrow">FRESH FROM THE COMMUNITY</p>
+              <h2 id="latest-heading">Latest review</h2>
+            </div>
+            <span className="review-rating-chip" aria-label={`${restaurant.latestReview.rating} out of 5 stars`}>
+              {restaurant.latestReview.rating}<span aria-hidden="true"> ★</span>
             </span>
           </div>
           <p className="review-comment">{restaurant.latestReview.comment}</p>
-          <time className="muted" dateTime={restaurant.latestReview.createdAt}>{restaurant.latestReview.createdAt}</time>
+          <time className="review-date" dateTime={restaurant.latestReview.createdAt}>{new Date(restaurant.latestReview.createdAt).toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric" })}</time>
         </section>
       ) : (
         <section className="empty-state">
+          <span className="empty-mark" aria-hidden="true">✳</span>
           <h2>Be the first to leave a review</h2>
           <p className="muted">There are no reviews yet. Share how your visit went.</p>
         </section>
@@ -95,15 +104,18 @@ export default function RestaurantPage({ params }: { params: Promise<{ id: strin
 
       {restaurant.reviews.length > 0 && (
         <section className="older-reviews" aria-labelledby="older-heading">
-          <h2 id="older-heading" className="section-heading">Earlier reviews</h2>
+          <div className="older-heading-row">
+            <div><p className="eyebrow">MORE TO EXPLORE</p><h2 id="older-heading" className="section-heading">Earlier reviews</h2></div>
+            <span className="older-count">{restaurant.reviews.length}</span>
+          </div>
           <ul className="review-list">
             {restaurant.reviews.map((review) => (
               <li key={review.id} className="review-item">
                 <div className="section-label-row">
-                  <span className="review-stars" aria-label={`${review.rating} out of 5 stars`}>
-                    {"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}
+                  <span className="review-rating-chip small" aria-label={`${review.rating} out of 5 stars`}>
+                    {review.rating}<span aria-hidden="true"> ★</span>
                   </span>
-                  <time className="muted" dateTime={review.createdAt}>{review.createdAt}</time>
+                  <time className="review-date" dateTime={review.createdAt}>{new Date(review.createdAt).toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric" })}</time>
                 </div>
                 <p className="review-comment">{review.comment}</p>
               </li>
@@ -112,7 +124,7 @@ export default function RestaurantPage({ params }: { params: Promise<{ id: strin
         </section>
       )}
 
-      <Link className="text-link" href={`/review/${restaurantId}`}>Write a review <span aria-hidden="true">→</span></Link>
+      <Link className="text-link" href={`/review/${restaurantId}`}><span>Share your experience</span><span className="link-arrow" aria-hidden="true">→</span></Link>
     </main>
   );
 }
